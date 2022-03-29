@@ -15,7 +15,10 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "dev": "docker-compose -f docker-compose.dev.yml up",
+    "prod" : "docker-compose -f docker-compose.prod.yml build",
+    "prod-run" : "docker run -p 80:80 --name sketch-app app-prod"
   },
   "eslintConfig": {
     "extends": [
