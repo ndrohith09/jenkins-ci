@@ -8,21 +8,30 @@ pipeline{
 
 	stages {
 
+        stage('node_modules') {
+
+			steps {
+				// sh 'docker-compose -f docker-compose.prod.yml build'
+                sh 'yarn'
+			}
+		}
+
 		stage('Build') {
 
 			steps {
-				sh 'docker-compose -f docker-compose.prod.yml build'
+				// sh 'docker-compose -f docker-compose.prod.yml build'
+                sh 'yarn build'
 			}
 		}
 
         
 
-		stage('Login') {
+		// stage('Login') {
 
-			steps {
-				sh 'echo $DOCKERHUB_CREDENTIALS_PSW | docker login -u $DOCKERHUB_CREDENTIALS_USR --password-stdin'
-			}
-		}
+		// 	steps {
+		// 		sh 'echo $DOCKERHUB_CREDENTIALS_PSW | docker login -u $DOCKERHUB_CREDENTIALS_USR --password-stdin'
+		// 	}
+		// }
 
         stage('test') {
 
@@ -31,17 +40,12 @@ pipeline{
 			}
 		}
 
-		stage('Push') {
-
-			steps {
-				sh 'docker push ndrohith09/app-prod:latest'
-			}
-		}
 	}
 
 	post {
 		always {
-			sh 'docker logout'
+			// sh 'docker logout'
+            sh 'executed successfully'
 		}
 	}
 
